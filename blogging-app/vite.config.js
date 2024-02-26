@@ -7,6 +7,6 @@ export default defineConfig({
   },
   plugins: [react()],
   define: {
-    BASE_URL: JSON.stringify('http://localhost:3000')
+    BASE_URL: JSON.stringify('https://graceful-boa-belt.cyclic.app')
   }
 })
