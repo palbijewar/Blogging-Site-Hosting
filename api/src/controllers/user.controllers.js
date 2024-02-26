@@ -49,7 +49,6 @@ export const google = async (req, res, next) => {
 
     if (user) {
       const token = jwt.sign({ id: user._id, is_admin: user.is_admin }, process.env.JWT_SECRET, { expiresIn: '3d' });
-       console.log("token : " , token)
       res.status(200).cookie('access_token', token, {
        httpOnly : true}).json(user);
     } else {
@@ -64,7 +63,6 @@ export const google = async (req, res, next) => {
 
       await newUser.save();
       const token = jwt.sign({ id: newUser._id, is_admin: newUser.is_admin }, process.env.JWT_SECRET, { expiresIn: '3d' });
-      console.log("token : " , token)
       res.status(200).cookie('access_token', token, {
        httpOnly : true}).json(newUser);
     }
