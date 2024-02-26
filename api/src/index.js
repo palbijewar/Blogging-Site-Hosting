@@ -18,7 +18,7 @@ app.use(express.json());
 
 app.use(cors({
   origin: 'http://localhost:3000',
-  credentials: true,
+  credentials: true, 
 }));
 
 mongoose.connect(`${process.env.MONGODB_URL}`)
@@ -54,3 +54,4 @@ app.use((err, req, res, next) => {
 app.listen(process.env.PORT || 3001, () => {
   console.log(`Server running on port: ${process.env.PORT || 3001}`);
 });
+
