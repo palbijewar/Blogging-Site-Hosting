@@ -6,6 +6,9 @@ import postRoutes from './routes/posts.routes.js';
 import commentRoutes from './routes/comments.js';
 import cors from 'cors';
 import cookieParser from 'cookie-parser';
+import path from 'path';
+
+const __dirname = path.resolve();
 
 dotenv.config();
 
@@ -15,7 +18,7 @@ app.use(express.json());
 
 app.use(cors({
   origin: 'http://localhost:3000',
-  credentials: true, 
+  credentials: true,
 }));
 
 mongoose.connect(`${process.env.MONGODB_URL}`)
@@ -25,6 +28,14 @@ mongoose.connect(`${process.env.MONGODB_URL}`)
 app.use('/api/users', userRoutes);
 app.use('/api/posts', postRoutes);
 app.use('/api/comments', commentRoutes);
+
+app.use(express.static(path.join(__dirname, "./blogging-app/dist")));
+
+app.get('*', function (_, res) {
+  res.sendFile(path.join(__dirname, "/blogging-app/dist/index.html"), function(error) {
+    res.status(500).send(error); 
+  });
+});
 
 app.get('/', (req, res) => {
   res.send('Hello World');
