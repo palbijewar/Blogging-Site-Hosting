@@ -11,12 +11,13 @@ function PostPage() {
     const [error, setError] = useState(false);
     const [post, setPost] = useState(null);
     const [recentPosts, setRecentPosts] = useState(null);
+    const baseUrl = import.meta.env.VITE_BASE_URL;
 
     useEffect(() => {
         const fetchPost = async () => {
             try {
                 setLoading(true);
-                const res = await fetch(`http://localhost:3000/api/posts?slug=${postSlug}`);
+                const res = await fetch(`${baseUrl}/api/posts?slug=${postSlug}`);
                 const data = await res.json();
                 if (!res.ok) {
                     setError(true);
@@ -39,7 +40,7 @@ function PostPage() {
     useEffect(() => {
         const fetchRecentPosts = async () => {
             try {
-                const res = await fetch(`http://localhost:3000/api/posts?limit=3`, {
+                const res = await fetch(`${baseUrl}/api/posts?limit=3`, {
                     credentials: 'include'
                 });
                 const data = await res.json();

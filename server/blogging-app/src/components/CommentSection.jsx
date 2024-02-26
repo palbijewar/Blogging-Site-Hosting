@@ -13,6 +13,7 @@ function CommentSection({ postId }) {
   const [showModal, setShowModal] = useState(false);
   const [commentToDelete, setCommentToDelete] = useState(null);
   const navigate = useNavigate();
+  const baseUrl = import.meta.env.VITE_BASE_URL;
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -21,7 +22,7 @@ function CommentSection({ postId }) {
     }
 
     try {
-      const res = await fetch(`http://localhost:3000/api/comments`, {
+      const res = await fetch(`${baseUrl}/api/comments`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -43,7 +44,7 @@ function CommentSection({ postId }) {
   useEffect(() => {
     const getComments = async () => {
       try {
-        const res = await fetch(`http://localhost:3000/api/comments/${postId}`, {
+        const res = await fetch(`${baseUrl}/api/comments/${postId}`, {
           credentials: 'include',
         });
         if (res.ok) {
@@ -63,7 +64,7 @@ function CommentSection({ postId }) {
         navigate('/signin');
         return;
       }
-      const res = await fetch(`http://localhost:3000/api/comments/like/${commentId}`, {
+      const res = await fetch(`${baseUrl}/api/comments/like/${commentId}`, {
         method: 'PUT',
         credentials: 'include',
       });
@@ -98,7 +99,7 @@ function CommentSection({ postId }) {
         navigate('/signin');
         return;
       }
-      const res = await fetch(`http://localhost:3000/api/comments/delete/${commentToDelete}`, {
+      const res = await fetch(`${baseUrl}/api/comments/delete/${commentToDelete}`, {
         method: 'DELETE',
         credentials: 'include',
       });

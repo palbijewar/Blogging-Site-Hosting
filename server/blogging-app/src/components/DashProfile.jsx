@@ -27,6 +27,7 @@ export default function DashProfile() {
   const [updateUserFailure, setUpdateUserFailure] = useState(null)
   const [showModal, setShowModal] = useState(false)
   const dispatch = useDispatch();
+  const baseUrl = import.meta.env.VITE_BASE_URL;
 
 const handleImageChange = (e) => {
   const file = e.target.files[0]
@@ -90,7 +91,7 @@ const handleFormSubmit = async (e) => {
   }
   try {
     dispatch(updateStart());
-    const res = await fetch(`http://localhost:3000/api/users/${currentUser._id}`, {
+    const res = await fetch(`${baseUrl}/api/users/${currentUser._id}`, {
       method: 'PUT',
       headers: {
         'Content-Type': 'application/json',
@@ -117,7 +118,7 @@ const handleDeleteUser = async () => {
   setShowModal(false);
   try {
     dispatch(deleteUserStart());
-    const res = await fetch(`http://localhost:3000/api/users/${currentUser._id}`, {
+    const res = await fetch(`${baseUrl}/api/users/${currentUser._id}`, {
       method: 'DELETE',
       credentials: 'include',
     });
@@ -133,7 +134,7 @@ const handleDeleteUser = async () => {
 
 const handleSignout = async () => {
   try {
-    const res = await fetch(`http://localhost:3000/api/users/signout`, {
+    const res = await fetch(`${baseUrl}/api/users/signout`, {
       method: 'POST',
       credentials: 'include',
     });

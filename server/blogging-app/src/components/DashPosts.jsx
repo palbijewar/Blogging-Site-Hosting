@@ -11,12 +11,13 @@ function DashPosts() {
     const [showModal, setShowModal] = useState(false);
     const [postIdToDelete, setPostIdToDelete] = useState('');
     const [loading, setLoading] = useState(false);
+    const baseUrl = import.meta.env.VITE_BASE_URL;
 
     useEffect(() => {
         const fetchPosts = async () => {
             try {
                 setLoading(true);
-                const res = await fetch(`http://localhost:3000/api/posts?user_id=${currentUser._id}`);
+                const res = await fetch(`${baseUrl}/api/posts?user_id=${currentUser._id}`);
                 const data = await res.json();
                 if (res.ok) {
                     if (data && data.length < 9) {
@@ -42,7 +43,7 @@ function DashPosts() {
         const startIndex = userPosts.length;
         try {
             setLoading(true);
-            const res = await fetch(`http://localhost:3000/api/posts?user_id=${currentUser._id}&startIndex=${startIndex}`);
+            const res = await fetch(`${baseUrl}/api/posts?user_id=${currentUser._id}&startIndex=${startIndex}`);
             const data = await res.json();
             if (res.ok) {
                 setUserPosts(prev => [...prev, ...data.allPosts]);
@@ -60,7 +61,7 @@ function DashPosts() {
     const handleDeletePost = async () => {
         setShowModal(false);
         try {
-            const res = await fetch(`http://localhost:3000/api/posts/${postIdToDelete}/${currentUser._id}`, {
+            const res = await fetch(`${baseUrl}/api/posts/${postIdToDelete}/${currentUser._id}`, {
                 method: 'DELETE',
                 credentials: 'include',
             });

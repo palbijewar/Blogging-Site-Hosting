@@ -11,12 +11,13 @@ function DashUsers() {
     const [showModal, setShowModal] = useState(false);
     const [userIdToDelete, setUserIdToDelete] = useState('');
     const [loading, setLoading] = useState(false);
+    const baseUrl = import.meta.env.VITE_BASE_URL;
 
     useEffect(() => {
         const fetchUsers = async () => {
             try {
                 setLoading(true);
-                const res = await fetch(`http://localhost:3000/api/users`, {
+                const res = await fetch(`${baseUrl}/api/users`, {
                     credentials: 'include',
                 });
                 const data = await res.json();
@@ -40,7 +41,7 @@ function DashUsers() {
         const startIndex = users.length;
         try {
             setLoading(true);
-            const res = await fetch(`http://localhost:3000/api/users?startIndex=${startIndex}`);
+            const res = await fetch(`${baseUrl}/api/users?startIndex=${startIndex}`);
             const data = await res.json();
             if (res.ok && data && data.totalUsersWithoutPasswords) {
                 setUsers(prevUsers => [...prevUsers, ...data.totalUsersWithoutPasswords]);
@@ -56,7 +57,7 @@ function DashUsers() {
     const handleDeleteUser = async () => {
         setShowModal(false);
         try {
-            const res = await fetch(`http://localhost:3000/api/users/${currentUser._id}`, {
+            const res = await fetch(`${baseUrl}/api/users/${currentUser._id}`, {
                 method: 'DELETE',
                 credentials: 'include',
             });

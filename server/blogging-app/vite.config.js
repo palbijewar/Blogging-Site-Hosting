@@ -6,4 +6,7 @@ export default defineConfig({
   server:{
   },
   plugins: [react()],
+  define: {
+    BASE_URL: JSON.stringify('http://localhost:3000')
+  }
 })

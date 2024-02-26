@@ -10,12 +10,13 @@ function DashComments() {
     const [showModal, setShowModal] = useState(false);
     const [commentIdToDelete, setCommentIdToDelete] = useState('');
     const [loading, setLoading] = useState(false);
+    const baseUrl = import.meta.env.VITE_BASE_URL;
 
     useEffect(() => {
         const fetchComments = async () => {
             try {
                 setLoading(true);
-                const res = await fetch(`http://localhost:3000/api/comments`, {
+                const res = await fetch(`${baseUrl}/api/comments`, {
                     credentials: 'include',
                 });
                 const data = await res.json();
@@ -39,7 +40,7 @@ function DashComments() {
         const startIndex = comments.length;
         try {
             setLoading(true);
-            const res = await fetch(`http://localhost:3000/api/comments?startIndex=${startIndex}`);
+            const res = await fetch(`${baseUrl}/api/comments?startIndex=${startIndex}`);
             const data = await res.json();
             if (res.ok) {
                 setComments(prevComment => [...prevComment, ...data.allComments]);
@@ -57,7 +58,7 @@ function DashComments() {
     const handleDeleteComment = async () => {
         setShowModal(false);
         try {
-            const res = await fetch(`http://localhost:3000/api/comments/delete/${commentIdToDelete}`, {
+            const res = await fetch(`${baseUrl}/api/comments/delete/${commentIdToDelete}`, {
                 method: 'DELETE',
                 credentials: 'include',
             });

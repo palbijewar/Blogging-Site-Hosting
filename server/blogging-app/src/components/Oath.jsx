@@ -10,12 +10,13 @@ export default function OAuth() {
     const auth = getAuth(app)
     const dispatch = useDispatch()
     const navigate = useNavigate()
+    const baseUrl = import.meta.env.VITE_BASE_URL;
     const handleGoogleClick = async () =>{
         const provider = new GoogleAuthProvider()
         provider.setCustomParameters({ prompt: 'select_account' })
         try {
             const resultsFromGoogle = await signInWithPopup(auth, provider)
-            const res = await fetch('http://localhost:3000/api/users/google', {
+            const res = await fetch('${baseUrl}/api/users/google', {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 credentials: 'include',

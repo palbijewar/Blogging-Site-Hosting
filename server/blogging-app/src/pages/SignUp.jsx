@@ -9,6 +9,7 @@ const [formData, setFormData] = useState({});
 const [errorMessage, setErrorMessage] = useState(null);
 const [loading, setLoading] = useState(false)
 const navigate = useNavigate();
+const baseUrl = import.meta.env.VITE_BASE_URL;
 
 const handleChange = (e) => {
  setFormData({...formData, [e.target.id]:e.target.value.trim()});
@@ -22,7 +23,7 @@ return setErrorMessage('Please fill out all fields.')
   try {
     setLoading(true)
     setErrorMessage(null)
-    const res = await fetch('http://localhost:3000/api/users', {
+    const res = await fetch(`${baseUrl}/api/users`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',

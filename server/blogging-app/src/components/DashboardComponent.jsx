@@ -15,11 +15,12 @@ function DashboardComponent() {
     const [lastMonthPosts, setLastMonthPosts] = useState(0);
     const [lastMonthComments, setLastMonthComments] = useState(0);
     const { currentUser } = useSelector((state) => state.user);
+    const baseUrl = import.meta.env.VITE_BASE_URL;
 
     useEffect(() => {
       const fetchUsers = async () => {
         try {
-          const res = await fetch(`http://localhost:3000/api/users?limit=5`, {
+          const res = await fetch(`${baseUrl}/api/users?limit=5`, {
             credentials: 'include',
           });
           const data = await res.json();
@@ -35,7 +36,7 @@ function DashboardComponent() {
   
       const fetchPosts = async () => {
         try {
-          const res = await fetch(`http://localhost:3000/api/posts?limit=5`,{
+          const res = await fetch(`${baseUrl}/api/posts?limit=5`,{
             credentials: 'include',
           });
           const data = await res.json();
@@ -51,7 +52,7 @@ function DashboardComponent() {
   
       const fetchComments = async () => {
         try {
-          const res = await fetch(`http://localhost:3000/api/comments?limit=5`, {
+          const res = await fetch(`${baseUrl}/api/comments?limit=5`, {
             credentials: 'include',
           });
           const data = await res.json();

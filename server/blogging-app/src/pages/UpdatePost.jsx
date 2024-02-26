@@ -23,11 +23,12 @@ function UpdatePost() {
     const [publishError, setPublishError] = useState(null);
     const navigate = useNavigate();
     const { postId } = useParams();
+    const baseUrl = import.meta.env.VITE_BASE_URL;
 
     useEffect(() => {
         const fetchPost = async () => {
           try {
-            const res = await fetch(`http://localhost:3000/api/posts?post_id=${postId}`);
+            const res = await fetch(`${baseUrl}/api/posts?post_id=${postId}`);
             const data = await res.json();
             if (!res.ok) {
               console.log(data.message);
@@ -83,7 +84,7 @@ function UpdatePost() {
   const handleSubmit = async (e) => {
     e.preventDefault();
   try {
-    const res = await fetch(`http://localhost:3000/api/posts/${formData._id}/${currentUser._id}`, {
+    const res = await fetch(`${baseUrl}/api/posts/${formData._id}/${currentUser._id}`, {
       method: 'put',
       credentials: 'include',
       headers: {

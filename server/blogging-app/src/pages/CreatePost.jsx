@@ -20,6 +20,7 @@ function CreatePost() {
   const [formData, setFormData] = useState({});
   const [publishError, setPublishError] = useState(null)
   const navigate = useNavigate()
+  const baseUrl = import.meta.env.VITE_BASE_URL;
 
   const handleUploadImage = async () => {
     try {
@@ -58,7 +59,7 @@ function CreatePost() {
   const handleSubmit = async (e) => {
   e.preventDefault();
   try {
-    const res = await fetch(`http://localhost:3000/api/posts/`, {
+    const res = await fetch(`${baseUrl}/api/posts/`, {
       method: 'POST',
       credentials: 'include',
       headers: {

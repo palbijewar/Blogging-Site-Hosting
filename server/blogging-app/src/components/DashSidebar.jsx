@@ -10,6 +10,7 @@ export default function DashSidebar() {
     const dispatch = useDispatch()
     const location = useLocation()
   const [tab, setTab] = useState('')
+  const baseUrl = import.meta.env.VITE_BASE_URL;
 
   useEffect(() => {
     const urlParams = new URLSearchParams(location.search)
@@ -20,7 +21,7 @@ export default function DashSidebar() {
   }, [location.search] )
   const handleSignout = async () => {
     try {
-      const res = await fetch(`http://localhost:3000/api/users/signout`, {
+      const res = await fetch(`${baseUrl}/api/users/signout`, {
         method: 'POST',
         credentials: 'include',
       });

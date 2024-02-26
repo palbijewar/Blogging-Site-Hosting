@@ -12,6 +12,7 @@ const [sidebarData , setSidebarData] = useState({
 const [posts, setPosts] = useState([]);
 const [loading, setLoading] = useState(false);
 const [showMore, setShowMore] = useState(false);
+const baseUrl = import.meta.env.VITE_BASE_URL;
 
 const location = useLocation();
 
@@ -33,7 +34,7 @@ useEffect(()=>{
   const fetchPosts = async () => {
     setLoading(true);
     const searchQuery = urlParams.toString();
-    const res = await fetch(`http://localhost:3000/api/posts?${searchQuery}`);
+    const res = await fetch(`${baseUrl}/api/posts?${searchQuery}`);
     if(!res.ok){
       setLoading(false);
       return;

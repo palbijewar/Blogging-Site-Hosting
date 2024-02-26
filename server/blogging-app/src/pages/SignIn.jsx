@@ -10,6 +10,7 @@ export default function SignIn() {
   const { loading, error: errorMessage } = useSelector((state) => state.user);
   const dispatch = useDispatch();
   const navigate = useNavigate();
+  const baseUrl = import.meta.env.VITE_BASE_URL;
 
   useEffect(() => {
     dispatch(signInFailure(null));
@@ -26,7 +27,7 @@ export default function SignIn() {
     }
     try {
       dispatch(signInStart());
-      const res = await fetch('http://localhost:3000/api/users/login', {
+      const res = await fetch(`${baseUrl}/api/users/login`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',

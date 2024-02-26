@@ -15,10 +15,11 @@ export default function Header() {
   const [searchTerm, setSearchTerm] = useState("")
   const location = useLocation();
   const navigate = useNavigate();
+  const baseUrl = import.meta.env.VITE_BASE_URL;
 
   const handleSignout = async () => {
     try {
-      const res = await fetch(`http://localhost:3000/api/users/signout`, {
+      const res = await fetch(`${baseUrl}/api/users/signout`, {
         method: 'POST',
         credentials: 'include',
       });
